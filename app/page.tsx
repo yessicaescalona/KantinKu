@@ -7,7 +7,7 @@ export default function Home() {
       <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 text-center space-y-4">
         {/* Judul */}
         <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
-          Selamat Datang di KantinKu!
+          Kartu Selamat Datang di KantinKu!
         </h1>
 
         {/* Kalimat Ajakan */}
