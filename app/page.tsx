@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="space-y-6 max-w-xl mx-auto py-4">
-      {/* Kartu Utama Beranda dengan gaya berdimensi seperti halaman Menu */}
+      {/* Kartu Selamat Datang */}
       <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 text-center space-y-4">
         {/* Judul */}
         <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
