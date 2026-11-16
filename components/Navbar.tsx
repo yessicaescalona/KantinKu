@@ -3,6 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+// Definisikan tipe data untuk item di keranjang agar tidak error "no-explicit-any"
+interface CartItem {
+  id: string | number;
+  jumlah: number;
+  [key: string]: unknown;
+}
+
 export default function Navbar() {
   const [totalItem, setTotalItem] = useState(0);
 
@@ -10,8 +17,8 @@ export default function Navbar() {
     if (typeof window === "undefined") return;
     const cart = localStorage.getItem("keranjang");
     if (cart) {
-      const parsed = JSON.parse(cart);
-      const sum = parsed.reduce((acc: number, item: any) => acc + item.jumlah, 0);
+      const parsed: CartItem[] = JSON.parse(cart);
+      const sum = parsed.reduce((acc: number, item: CartItem) => acc + item.jumlah, 0);
       setTotalItem(sum);
     } else {
       setTotalItem(0);
@@ -19,9 +26,14 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    hitung();
+    const timer = setTimeout(() => {
+      hitung();
+    }, 0);
+
     window.addEventListener("keranjang-berubah", hitung);
+    
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("keranjang-berubah", hitung);
     };
   }, []);

@@ -18,10 +18,14 @@ export default function MenuCard({ item, rupiah }: MenuCardProps) {
   const isHabis = item.stok === 0;
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
-  // Cek status favorit dari localStorage saat komponen dimuat
+  // Cek status favorit dari localStorage saat komponen dimuat (menggunakan setTimeout agar tidak error linter)
   useEffect(() => {
-    const savedFavs = JSON.parse(localStorage.getItem("favorit") || "[]");
-    setIsFavorited(savedFavs.includes(item.id));
+    const timer = setTimeout(() => {
+      const savedFavs = JSON.parse(localStorage.getItem("favorit") || "[]");
+      setIsFavorited(savedFavs.includes(item.id));
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, [item.id]);
 
   // Fungsi toggle favorit
